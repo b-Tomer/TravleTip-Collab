@@ -77,6 +77,11 @@ header {
     width: max-content;
 }
 
+.btn:hover{
+    cursor: pointer;
+    background: #f4f3f3bc;
+}
+
 
 footer {
     grid-row: 5;
