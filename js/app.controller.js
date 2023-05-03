@@ -8,6 +8,7 @@ window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
+window.onLocationSearch = onLocationSearch
 
 function onInit() {
     mapService.initMap()
@@ -55,10 +56,11 @@ function onPanTo() {
     mapService.panTo(35.6895, 139.6917)
 }
 
-window.onLocationSearch = onLocationSearch
 function onLocationSearch() {
     const elSearchInput = document.querySelector('.search-bar')
     const searchInput = elSearchInput.value
     geoCode.getCoordsByQuery(searchInput)
-    const API_KEY = 'AIzaSyAaC8_t37idTPsW4-NCvOjZL_TeAyTuDX4'
+        .then(res => {
+        console.log("res", res)
+    })
 }

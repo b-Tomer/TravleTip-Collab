@@ -8,7 +8,6 @@ export const util = {
     API_KEY: 'AIzaSyAaC8_t37idTPsW4-NCvOjZL_TeAyTuDX4'
 }
 
-
 // Var that is used throughout this Module (not global)
 var gMap
 
