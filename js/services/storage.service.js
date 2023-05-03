@@ -32,3 +32,5 @@ console.log("print('hey')", print('hey'))
 function print(text) {
   console.log("text:", text)
 }
+
+console.log("1 + 1", 1 + 1)
