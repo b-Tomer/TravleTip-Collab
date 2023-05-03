@@ -9,6 +9,7 @@ window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 window.onLocationSearch = onLocationSearch
+window.onRemoveLoc = onRemoveLoc
 
 function onInit() {
     mapService.initMap()
@@ -16,7 +17,6 @@ function onInit() {
             console.log('Map is ready')
         })
         .catch(() => console.log('Error: cannot init map'))
-    renderLocs()
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -46,11 +46,13 @@ function onGetUserPos() {
             console.log('User position is:', pos.coords)
             document.querySelector('.user-pos').innerText =
                 `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
+                geoCode.getLocationByCoords(pos.coords.latitude,pos.coords.longitude)
         })
         .catch(err => {
             console.log('err!!!', err)
         })
 }
+
 function onPanTo(lat, lng) {
     console.log("lat, lng", lat, lng)
     console.log('Panning the Map')
@@ -66,8 +68,8 @@ function onLocationSearch() {
             const lng = place.lng
             mapService.panTo(lat, lng)
             storageService.post(locService.STORAGE_KEY, place)
-            console.log("storageService.STORAGE_KEY", locService.STORAGE_KEY)
         })
+        elSearchInput.value = ' '
 }
 
 function renderLocs(locations) {
@@ -76,8 +78,17 @@ function renderLocs(locations) {
         return `<div class="loc">
         <h3>${place.name}</h3>
         <button onclick="onPanTo(${place.lat},${place.lng}) "class="btn go-btn">Go</button>
-        <button onclick="onRemoveLoc(${place.id})" class="btn remove-btn">❌</button>
+        <button onclick="onRemoveLoc('${place.id}')" class="btn remove-btn">❌</button>
         </div>`
     })
-document.querySelector('.locs').innerHTML = strHtml.join('')
+    document.querySelector('.locs').innerHTML = strHtml.join('')
+}
+
+function onRemoveLoc(placeId) {
+    locService.getLocs()
+        .then(locs => {
+            console.log('Locations:', locs)
+            storageService.remove(locService.STORAGE_KEY, placeId)
+            renderLocs(locs)
+        })
 }

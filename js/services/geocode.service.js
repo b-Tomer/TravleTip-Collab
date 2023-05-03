@@ -1,8 +1,23 @@
 import { util } from "./map.service.js"
 
 export const geoCode = {
-    getCoordsByQuery
+    getLocationByCoords
 }
+
+function getLocationByCoords(lat, lng) {
+    let searchUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${util.API_KEY}`
+
+    return axios.get(searchUrl).
+        then(res => {
+            console.log("res", res.data)
+            // setLocationData(res.data.results[0])
+        })
+        .catch(err => {
+            console.error("err", err)
+            throw err
+        })
+}
+
 
 // function getCoordsByQuery(searchInput) {
 //     let search_query = `https://maps.googleapis.com/maps/api/geocode/json?address=${searchInput}&key=${util.API_KEY}`
