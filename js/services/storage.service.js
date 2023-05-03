@@ -24,3 +24,11 @@ function example(num){
   num+=10
   return num
 }
+
+// ************************************************* RONI SECTION
+
+console.log("print('hey')", print('hey'))
+
+function print(text) {
+  console.log("text:", text)
+}
