@@ -1,0 +1,90 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.main-container {
+    padding: 25px 50px;
+    border: 2px solid rgb(125, 125, 125);
+    border-radius: 2em;
+    margin: 60px auto;
+    display: grid;
+    background: #e7e7e7;
+    gap: 35px;
+    grid-template-columns: 1.5fr 2fr;
+    grid-template-rows: 80px 1fr 0.6fr;
+}
+
+.tube-container {
+    grid-column: 2;
+    grid-row: 2;
+    border: 2px solid rgb(218, 218, 218);
+}
+
+.wiki-container {
+    display: flex;
+    border: 2px solid rgb(218, 218, 218);
+    grid-row: 3;
+    grid-column: 2;
+    flex-direction: column;
+
+}
+
+.search-container {
+    grid-row: 1;
+    grid-column: 2;
+    justify-self: center;
+    display: flex;
+}
+
+.search-bar {
+    width: 200px;
+    height: 30px;
+    align-self: flex-end;
+}
+
+h1 {
+    color: rgb(250, 152, 72);
+    font-size: 4em;
+    font-family: fantasy;
+    line-height: 0px;
+    letter-spacing: 0.01em;
+}
+
+.header-container {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.previews-container {
+    grid-column: 1;
+    grid-row: 2/4;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(218, 218, 218);
+    gap: 5px;
+}
+
+.preview-item {
+    background: #4e4e4e;
+    display: flex;
+    justify-content: center;
+}
+
+.preview-item img {
+    width: 80%;
+}
+
+.preview-item:hover {
+    cursor: pointer;
+    background: #616161;
+}
+
+h2{
+    color: rgb(250, 152, 72);
+    font-size:2em;
+
+}
