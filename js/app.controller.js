@@ -1,10 +1,10 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
 import { geoCode } from './services/geocode.service.js'
-
+import { storageService } from './services/async-storage.service.js'
 
 window.onload = onInit
-window.onAddMarker = onAddMarker
+window.onSaveLoc = onSaveLoc
 window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
@@ -16,6 +16,7 @@ function onInit() {
             console.log('Map is ready')
         })
         .catch(() => console.log('Error: cannot init map'))
+    renderLocs()
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -26,9 +27,8 @@ function getPosition() {
     })
 }
 
-function onAddMarker(pos) {
-    console.log('Adding a marker: ' , pos)
-    // mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 })
+function onSaveLoc(pos) {
+    console.log('Adding a marker: ', pos)
     mapService.addMarker(pos)
 }
 
@@ -36,7 +36,7 @@ function onGetLocs() {
     locService.getLocs()
         .then(locs => {
             console.log('Locations:', locs)
-            document.querySelector('.locs').innerText = JSON.stringify(locs, null, 2)
+            renderLocs(locs)
         })
 }
 
@@ -51,16 +51,33 @@ function onGetUserPos() {
             console.log('err!!!', err)
         })
 }
-function onPanTo() {
+function onPanTo(lat, lng) {
+    console.log("lat, lng", lat, lng)
     console.log('Panning the Map')
-    mapService.panTo(35.6895, 139.6917)
+    mapService.panTo(lat, lng)
 }
 
 function onLocationSearch() {
     const elSearchInput = document.querySelector('.search-bar')
     const searchInput = elSearchInput.value
-    geoCode.getCoordsByQuery(searchInput)
-        .then(res => {
-        console.log("res", res)
+    locService.getPlaceDetails(searchInput).
+        then(place => {
+            const lat = place.lat
+            const lng = place.lng
+            mapService.panTo(lat, lng)
+            storageService.post(locService.STORAGE_KEY, place)
+            console.log("storageService.STORAGE_KEY", locService.STORAGE_KEY)
+        })
+}
+
+function renderLocs(locations) {
+    console.log("locations", locations)
+    const strHtml = locations.map(place => {
+        return `<div class="loc">
+        <h3>${place.name}</h3>
+        <button onclick="onPanTo(${place.lat},${place.lng}) "class="btn go-btn">Go</button>
+        <button onclick="onRemoveLoc(${place.id})" class="btn remove-btn">❌</button>
+        </div>`
     })
+document.querySelector('.locs').innerHTML = strHtml.join('')
 }

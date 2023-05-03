@@ -1,14 +1,16 @@
+const STORAGE_KEY = 'locationsDB'
+const gSearchKey = 'haifa'
 
 import { storageService } from './async-storage.service.js'
 import { util } from './map.service.js'
 
 export const locService = {
-    getLocs
+    getLocs,
+    getPlaceDetails,
+    STORAGE_KEY
 }
-const STORAGE_KEY = 'locationsDB'
-const gSearchKey = 'haifa'
 
-const locs = (!storageService.query(STORAGE_KEY)) || [
+const locs = storageService.query(STORAGE_KEY) || [
     { name: 'Greatplace', lat: 32.047104, lng: 34.832384 },
     { name: 'Neveragain', lat: 32.047201, lng: 34.832581 },
 ]
