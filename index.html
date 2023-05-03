@@ -4,24 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TravelTip</title>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
     <main class="main-container">
-
-        <h1>TravelTip Collab!</h1>
-        <div id="map" style="width: 100%; height: 400px;"></div>
-        <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
-        <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
-        <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
-        <button onclick="onPanTo()"class="btn-pan">Pan Map to Tokyo</button>
+        <header>
+            <h1>TravelTip Collab!</h1>
+            <input class="search-bar" type="search">
+            <button class="btn">My location</button>
+        </header>
+        <section class="location-container">
+            <p>You are at: <span class="user-pos"></span></p>
+            <button class="btn">Copy location</button>
+        </section>
+        <main class="main-content">
+            <div class="map-container" id="map" style="width: 100%; height: 400px;"></div>
+            <div class="weather-container"> Werather Today</div>
+            <div class="loctions-table">
+                <p>Locations: bla bla
+                    <pre class="locs"></pre>
+                </p>
+            </div>
+        </main>
+        <div class="btns-container">
+            <button onclick="onAddMarker()" class="btn btn-add-marker">Add Marker Speific Location</button>
+            <button onclick="onGetUserPos()" class="btn btn-user-pos">Get User Position</button>
+            <button onclick="onGetLocs()" class="btn btn-get-locs">Get Locations</button>
+            <button onclick="onPanTo()"class="btn btn-pan">Pan Map to Tokyo</button>  
+        </div>
+       
         
-        <p>You are at: <span class="user-pos"></span></p>
-        <p>Locations: 
-            <pre class="locs"></pre>
-        </p>
+       
         
         <footer>Developed by Tomer & Roni</footer>
-        
+
     </main>
 
 
