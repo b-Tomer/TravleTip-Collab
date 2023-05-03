@@ -26,7 +26,7 @@ function getPosition() {
 }
 
 function onAddMarker(pos) {
-    console.log('Adding a marker')
+    console.log('Adding a marker: ' , pos)
     // mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 })
     mapService.addMarker(pos)
 }
@@ -62,3 +62,4 @@ function onLocationSearch() {
     geoCode.getCoordsByQuery(searchInput)
     const API_KEY = 'AIzaSyAaC8_t37idTPsW4-NCvOjZL_TeAyTuDX4'
 }
+
