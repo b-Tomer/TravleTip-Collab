@@ -54,6 +54,10 @@ function onGetUserPos() {
         })
 }
 
+function renderUserLocation() {
+    
+}
+
 function onPanTo(lat, lng) {
     console.log("lat, lng", lat, lng)
     console.log('Panning the Map')
