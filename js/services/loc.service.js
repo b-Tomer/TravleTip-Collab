@@ -10,10 +10,19 @@ export const locService = {
     STORAGE_KEY
 }
 
-const locs = storageService.query(STORAGE_KEY) || [
-    { name: 'Greatplace', lat: 32.047104, lng: 34.832384 },
-    { name: 'Neveragain', lat: 32.047201, lng: 34.832581 },
-]
+
+function createLocs(){
+    const locs = storageService.query(STORAGE_KEY) || [
+        { name: 'Greatplace', lat: 32.047104, lng: 34.832384 },
+        { name: 'Neveragain', lat: 32.047201, lng: 34.832581 },
+    ]
+   return locs
+}
+
+
+
+
+
 
 function _createPlace(id,name, lat, lng, weather, createdAt) {
     return {
@@ -48,8 +57,10 @@ function filterInfo(data){
 }
 
 function getLocs() {
+   const locs = createLocs()
     return new Promise((resolve, reject) => {
         setTimeout(() => {
+            console.log('locs: ', locs )
             resolve(locs)
         }, 2000)
     })

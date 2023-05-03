@@ -50,7 +50,6 @@ header {
 .weather-container {
     grid-column: 1;
     grid-row: 1;
-    border: 2px solid black;
 }
 
 .map-container {
@@ -61,27 +60,27 @@ header {
 .loctions-table {
     grid-column: 1;
     grid-row: 2;
-    /* height: 300px; */
-    border: 2px solid black;
 }
 
 .btns-container {
     grid-row: 4;
     justify-content: end;
     display: flex;
+    gap: 20px;
 }
 
 .btn {
     border-radius: 2em;
-    height: 25px;
+    height: 35px;
     width: max-content;
+    border: #c3c3c38b;
+    font-size: 1.1em;
 }
 
-.btn:hover{
+.btn:hover {
     cursor: pointer;
     background: #a8a8a8bc;
 }
-
 
 footer {
     grid-row: 5;
@@ -94,8 +93,10 @@ footer {
 }
 
 .search-bar {
-    width: 200px;
-    height: 30px;
+    width: 250px;
+    height: 40px;
+    border-radius: 2em;
+    border: rgba(246, 246, 246, 0)
 }
 
 h1 {
@@ -104,4 +105,10 @@ h1 {
     font-family: fantasy;
     line-height: 0px;
     letter-spacing: 0.01em;
+    margin-right: 20%;
+}
+
+p{
+    font-size: 1.4em;
+    font-weight: 600;
 }

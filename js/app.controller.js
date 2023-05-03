@@ -33,6 +33,7 @@ function onSaveLoc(pos) {
 }
 
 function onGetLocs() {
+    // document.querySelector('.locs').innerHTML = ''
     locService.getLocs()
         .then(locs => {
             console.log('Locations:', locs)
@@ -46,16 +47,12 @@ function onGetUserPos() {
             console.log('User position is:', pos.coords)
             document.querySelector('.user-pos').innerText =
                 `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
-                geoCode.getLocationByCoords(pos.coords.latitude,pos.coords.longitude)
-                onPanTo(pos.coords.latitude,pos.coords.longitude)
+            geoCode.getLocationByCoords(pos.coords.latitude, pos.coords.longitude)
+            onPanTo(pos.coords.latitude, pos.coords.longitude)
         })
         .catch(err => {
             console.log('err!!!', err)
         })
-}
-
-function renderUserLocation() {
-    
 }
 
 function onPanTo(lat, lng) {
@@ -74,10 +71,11 @@ function onLocationSearch() {
             mapService.panTo(lat, lng)
             storageService.post(locService.STORAGE_KEY, place)
         })
-        elSearchInput.value = ' '
+    elSearchInput.value = ' '
 }
 
 function renderLocs(locations) {
+
     console.log("locations", locations)
     const strHtml = locations.map(place => {
         return `<div class="loc">
@@ -94,6 +92,15 @@ function onRemoveLoc(placeId) {
         .then(locs => {
             console.log('Locations:', locs)
             storageService.remove(locService.STORAGE_KEY, placeId)
-            renderLocs(locs)
+            // .then(() => {
+
+                renderLocs(locs)
+            // })
         })
 }
+
+// locService.getLocs()
+// .then(locs => {
+//     console.log('Locations:', locs)
+//     renderLocs(locs)
+// })
